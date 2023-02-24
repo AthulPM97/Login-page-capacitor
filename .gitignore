@@ -1,1 +1,4 @@
 node_modules
+android
+build
+start.sh

@@ -4,7 +4,7 @@ import Login from "./routes/Login";
 
 function App() {
   return (
-    <div style={{margin:'1rem'}}>
+    <div style={{margin:'1rem',paddingTop: 'env(safe-area-inset-top)'}}>
     <Switch>
       <Route path="/" exact>
         <Login/>
