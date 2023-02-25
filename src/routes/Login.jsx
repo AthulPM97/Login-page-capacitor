@@ -5,29 +5,47 @@ import {
   IonInput,
   IonItem,
   IonLabel,
+  useIonAlert,
+  useIonLoading,
 } from "@ionic/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import validate from "./validate";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alert] = useIonAlert();
+  const [present, dismiss] = useIonLoading();
 
   const history = useHistory();
 
   const emailChangeHandler = (e) => {
-    console.log(e.target.value);
+    setEmail(e.target.value);
   };
   const passwordChangeHandler = (e) => {
-    console.log(e.target.value);
+    setPassword(e.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
+    //loading popup
+    await present({ message: "Loading..." });
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      history.push("/app/dashboard");
-    }, 1500);
+    if (validate(email, password)) {
+      setTimeout(() => {
+        setLoading(false);
+        history.push("/app/dashboard");
+        dismiss();
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        setLoading(false);
+        dismiss();
+        alert({ message: "invalid password" });
+      }, 1500);
+    }
   };
   return (
     <IonCard>
