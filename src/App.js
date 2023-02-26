@@ -5,15 +5,23 @@ import Login from "./routes/Login";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
-import "./theme/variables.css"
+import "./theme/variables.css";
 
 import { setupIonicReact } from "@ionic/react";
+import { useContext } from "react";
+import AuthContext from "./store/auth-context";
 setupIonicReact();
 
 function App() {
+  const authCtx = useContext(AuthContext);
+  console.log(authCtx);
   return (
-    <div style={{ margin: "0 1rem 0 1rem", paddingTop: "env(safe-area-inset-top)" }}>
-      
+    <div
+      style={{
+        margin: "0 1rem 0 1rem",
+        paddingTop: "env(safe-area-inset-top)",
+      }}
+    >
       <Switch>
         <Route path="/" exact>
           <Login />
