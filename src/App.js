@@ -13,7 +13,7 @@ setupIonicReact();
 function App() {
   return (
     <div style={{ margin: "0 1rem 0 1rem", paddingTop: "env(safe-area-inset-top)" }}>
-      <h1 style={{textAlign:'center'}}>Login page</h1>
+      
       <Switch>
         <Route path="/" exact>
           <Login />

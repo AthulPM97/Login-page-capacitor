@@ -43,12 +43,13 @@ const Login = () => {
       setTimeout(() => {
         setLoading(false);
         dismiss();
-        alert({ message: "invalid password" });
+        alert({ message: "invalid password", buttons: [{text: "Ok"}]});
       }, 1500);
     }
   };
   return (
     <IonCard>
+      <h1 style={{textAlign:'center'}}>Login page</h1>
       <IonCardContent>
         <form onSubmit={submitHandler}>
           <IonItem>
