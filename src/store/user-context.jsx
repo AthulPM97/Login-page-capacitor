@@ -23,7 +23,7 @@ const userReducer = (state,action) => {
   }
   if(action.type === "CLEAR_USERS") {
     localStorage.removeItem('users');
-    return defaulUsersState;
+    return { users: [] };
   }
   return defaulUsersState;
 }
