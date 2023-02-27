@@ -1,29 +1,33 @@
 import { IonButton, IonContent, IonInput, IonItem } from "@ionic/react";
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import UserContext from "../store/user-context";
 import Users from "./Users";
 
-const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 const Dashboard = () => {
   //refs
   const nameRef = useRef();
   const ageRef = useRef();
 
-  //states
-  const [users, setUsers] = useState(storedUsers);
-  console.log(users);
-  localStorage.setItem("users", JSON.stringify(users));
+  //store
+  const usersCtx = useContext(UserContext);
+  const users = usersCtx.users;
 
   //handlers
   const submitHandler = (event) => {
     event.preventDefault();
-    const userDetails = {
+    const newUser = {
       name: nameRef.current.value,
       age: ageRef.current.value,
     };
-    setUsers((prevUsers) => [...prevUsers, userDetails]);    
+    console.log(newUser);
+    usersCtx.addUser(newUser);
   };
 
-  const displayUsers = users.map((user) => <Users user={user}/>);
+  const clearUsersHandler = () => {
+    usersCtx.clearUsers();
+  };
+
+  const displayUsers = users.map((user) => <Users user={user} key={user.name}/>);
 
   return (
     <IonContent style={{ height: "100vh" }}>
@@ -37,6 +41,9 @@ const Dashboard = () => {
         <IonButton type="submit">Submit</IonButton>
       </form>
       {displayUsers}
+      <div style={{ textAlign: "center" }}>
+        <IonButton onClick={clearUsersHandler}>Clear</IonButton>
+      </div>
     </IonContent>
   );
 };

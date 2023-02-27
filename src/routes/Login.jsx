@@ -8,19 +8,27 @@ import {
   useIonAlert,
   useIonLoading,
 } from "@ionic/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../store/auth-context";
 import validate from "./validate";
 
 const Login = () => {
+  //states
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [alert] = useIonAlert();
   const [present, dismiss] = useIonLoading();
 
+  //history
   const history = useHistory();
 
+  //store
+  const authCtx = useContext(AuthContext);
+
+  //handlers
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
   };

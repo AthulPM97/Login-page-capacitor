@@ -14,7 +14,7 @@ export const AuthProvider = (props) => {
     authContext.isLoggedin = false;
   };
   const authContext = {
-    isLoggedin: null,
+    isLoggedin: true,
     login: loginHandler,
     logout: logoutHandler,
   };

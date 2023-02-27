@@ -26,9 +26,9 @@ function App() {
         <Route path="/" exact>
           <Login />
         </Route>
-        <Route path="/app/dashboard">
+        {authCtx.isLoggedin && <Route path="/app/dashboard">
           <Dashboard />
-        </Route>
+        </Route>}
         <Route path="*">
           <main>
             <p>There is nothing here</p>
